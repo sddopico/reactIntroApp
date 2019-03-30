@@ -47,17 +47,20 @@ function Square(props) {
     constructor(props) {
       super(props);
       this.state = {
-        history: [{
+        history: [
+          {
           squares: Array(9).fill(null),
-        }],
-          xIsNext: true,
+        }
+      ],
+          stepNumber: 0,
+          xIsNext: true
       };
     }
 
     handleClick(i) {
       const history = this.state.history.slice(0, this.state.stepNumber +1);
       const current = history[history.length - 1];
-      const squares = current.state.squares.slice();
+      const squares = current.squares.slice();
       if (calculateWinner(squares) || squares[i]) {
         return;
       }
@@ -74,8 +77,8 @@ function Square(props) {
     jumpTo(step) {
       this.setState({
         stepNumber: step,
-        xIsNext: (step % 2) === 0,
-      })
+        xIsNext: (step % 2) === 0
+      });
     }
 
     render() {
